@@ -1,0 +1,64 @@
+<div class="container-fluid" data-aos="slide-up" data-aos-duration="1000">
+  <div
+    class="row justify-content-center py-5"
+    style="height: 175px; background-color: #212529"
+  >
+    <div class="col-5 text-center align-self-center">
+      <h3 class="text-success times-font">
+        Surat Masuk <span class="text-light">& Surat Keluar</span>
+      </h3>
+    </div>
+  </div>
+</div>
+
+<div
+  id="counter-section"
+  class="container-fluid"
+  data-aos="slide-right"
+  data-aos-duration="1500"
+>
+  <div
+    id="counter"
+    class="row justify-content-evenly py-3"
+    style="height: 500px"
+  >
+    <div
+      class="col-5 text-center align-self-center"
+      data-aos="slide-right"
+      data-aos-duration="1500"
+    >
+      <div class="card text-center">
+        <div class="card-header">Perhitungan</div>
+        <div class="card-body">
+          <h5 class="card-title text-success">
+            <i class="bi bi-inboxes-fill"></i> Surat Masuk
+          </h5>
+          <h1 class="mb-3"><%= masuk %></h1>
+          <a
+            href="/masuk?category=no&query="
+            class="mb-3 btn btn-outline-success"
+            >Lihat Semua <i class="bi bi-arrow-bar-right"></i
+          ></a>
+        </div>
+        <div class="card-footer text-muted">- - -</div>
+      </div>
+    </div>
+    <div class="col-5 text-center align-self-center">
+      <div class="card text-center">
+        <div class="card-header">Pehritungan</div>
+        <div class="card-body">
+          <h5 class="card-title text-success">
+            <i class="bi bi-envelope-paper-fill"></i> Surat Keluar
+          </h5>
+          <h1 class="mb-3"><%= keluar %></h1>
+          <a
+            href="/keluar?category=no&query="
+            class="mb-3 btn btn-outline-success"
+            >Lihat Semua <i class="bi bi-arrow-bar-right"></i
+          ></a>
+        </div>
+        <div class="card-footer text-muted">- - -</div>
+      </div>
+    </div>
+  </div>
+</div>

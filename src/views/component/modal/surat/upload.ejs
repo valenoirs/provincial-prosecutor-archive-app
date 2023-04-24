@@ -1,0 +1,49 @@
+<div
+  class="modal fade"
+  id="upload"
+  tabindex="-1"
+  aria-labelledby="uploadLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="uploadLabel"><i class="bi bi-chevron-right"></i> Upload Surat</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/surat" enctype="multipart/form-data">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="no" name="no" placeholder=" " required autocomplete="off">
+              <label for="no" class="form-label">Nomor Surat</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="date" class="form-control" id="date" name="date" placeholder=" " required>
+              <label for="date" class="form-label">Tanggal Surat</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="about" name="about" placeholder=" " required autocomplete="off">
+              <label for="about" class="form-label">Perihal</label>
+            </div>
+            <div class="mb-3">
+                <!-- <label for="file" class="form-label">Upload</label> -->
+                <input type="file" class="form-control" id="file" name="file" required>
+                <div id="fileHelp" class="form-text">
+                    *upload file dengan format .pdf
+                </div>
+            </div>
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-outline-success"><i class="bi bi-envelope-plus-fill"></i> Upload</button>
+            </div>
+        </form>
+    </div>
+    </div>
+  </div>
+</div>

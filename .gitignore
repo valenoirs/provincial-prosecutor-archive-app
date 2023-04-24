@@ -1,0 +1,8 @@
+node_modules
+build
+ignore
+.env
+src/log
+src/ignore
+src/public/upload
+_build

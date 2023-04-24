@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  /* background: rgb(255, 250, 250); */
+  /* background-image: linear-gradient(
+        rgba(255, 255, 255, 0.85),
+        rgba(255, 255, 255, 0.85)
+      ), */
+  /* url("https://media.istockphoto.com/vectors/online-shopping-icon-on-white-background-vector-illustration-vector-id1170078646?k=20&m=1170078646&s=612x612&w=0&h=pFR-vqMC7L4gnGtZpSNgKEgGgRtspQ1fUlR9h8GIRmU=") */
+  background-color: #f8f9fa;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  background-size: 500px 500px;
+  /* background-size: cover; */
+
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100%;
+}
+
+.form-control:focus {
+  border-color: #198754;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px #19875480;
+}
+
+.form-select:focus {
+  border-color: #198754;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px #19875480;
+}
+
+.dropdown-item:hover {
+  background-color: #19875410;
+}

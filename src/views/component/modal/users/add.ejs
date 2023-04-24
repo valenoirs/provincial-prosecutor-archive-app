@@ -1,0 +1,58 @@
+<div
+  class="modal fade"
+  id="add"
+  tabindex="-1"
+  aria-labelledby="addLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="addLabel"><i class="bi bi-chevron-right"></i> Tambah Pengguna</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/admin">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="name" name="name" placeholder=" " required autocomplete="off">
+            <label for="name" class="form-label">Nama</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="email" name="email" placeholder=" " required autocomplete="off">
+            <label for="email" class="form-label">Email</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="address" name="address" placeholder=" " required autocomplete="off">
+            <label for="address" class="form-label">Alamat</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="phone" name="phone" placeholder=" " required autocomplete="off">
+            <label for="phone" class="form-label">No. Telp</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password" name="password" placeholder=" " required>
+            <label for="password" class="form-label">Password</label>
+          </div>
+          <div class="mb-3">
+            <label for="year" class="form-label">Role</label>
+            <select class="form-select" name="role" id="role" required>
+              <option value="USER">USER</option>
+              <option value="ADMIN">ADMIN</option>
+              <option value="SUPER">SUPER</option>
+            </select>
+          </div>
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-outline-success"><i class="bi bi-person-plus"></i> Tambah</button>
+            </div>
+        </form>
+    </div>
+    </div>
+  </div>
+</div>

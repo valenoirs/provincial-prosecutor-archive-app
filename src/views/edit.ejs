@@ -1,0 +1,118 @@
+<div class="container-fluid">
+  <div class="row p-5 justify-content-evenly">
+    <div class="col-5 p-5" style="border: 1px solid rgba(128, 128, 128, 0.445)">
+      <h3>
+        <span class="text-success"><i class="bi bi-person-fill-gear"></i></span>
+        Edit Profile
+      </h3>
+      <br />
+      <form method="post" action="/user?_method=patch">
+        <div class="mb-3">
+          <label for="email" class="form-label">Alamat Email</label>
+          <input
+            type="email"
+            name="email"
+            class="form-control"
+            id="email"
+            aria-describedby="emailHelp"
+            value="<%= user.email %>"
+            autocomplete="off"
+            required
+            readonly
+          />
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Nama</label>
+          <input
+            type="text"
+            name="name"
+            class="form-control"
+            id="name"
+            value="<%= user.name %>"
+            autocomplete="off"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">Alamat</label>
+          <input
+            type="text"
+            name="address"
+            class="form-control"
+            id="address"
+            value="<%= user.address %>"
+            autocomplete="off"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">No. Telp</label>
+          <input
+            type="text"
+            name="phone"
+            class="form-control"
+            id="phone"
+            value="<%= user.phone %>"
+            autocomplete="off"
+            required
+          />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-outline-success">
+          Edit Profile <i class="bi bi-pencil-square"></i>
+        </button>
+      </form>
+    </div>
+    <div class="col-5 p-5" style="border: 1px solid rgba(128, 128, 128, 0.445)">
+      <h3>
+        <span class="text-success"><i class="bi bi-key-fill"></i></span> Edit
+        Password
+      </h3>
+      <br />
+      <form method="post" action="/user?_method=put">
+        <div class="mb-3">
+          <label for="exampleInputPassword" class="form-label"
+            >Password Baru</label
+          >
+          <input
+            type="password"
+            name="password"
+            placeholder=""
+            class="form-control"
+            id="exampleInputPassword"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPasswordConfirmation" class="form-label"
+            >Konfirmasi Password Baru</label
+          >
+          <input
+            type="password"
+            name="passwordConfirmation"
+            placeholder=""
+            class="form-control"
+            id="exampleInputPasswordConfirmation"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword" class="form-label"
+            >Password Lama</label
+          >
+          <input
+            type="password"
+            name="oldPassword"
+            placeholder=""
+            class="form-control"
+            id="exampleInputPassword"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-outline-success mt-3">
+          Edit Password <i class="bi bi-pencil-square"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

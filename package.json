@@ -1,0 +1,49 @@
+{
+  "name": "provincial-prosecutor-archive-app",
+  "version": "1.0.0",
+  "description": "Web-based Provincial Prosecutor archive app.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && npm run serve",
+    "build": "rimraf _build && npx tsc && npm run lummox && rimraf build && npm run copy",
+    "lummox": "javascript-obfuscator build --output _build --compact false --dead-code-injection true --dead-code-injection-threshold 1",
+    "copy": "ts-node copy",
+    "serve": "node _build/index.js",
+    "dev": "nodemon",
+    "lint": "eslint . --ext .ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "valenoirs",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/connect-flash": "^0.0.37",
+    "@types/ejs": "^3.1.1",
+    "@types/express": "^4.17.13",
+    "@types/express-ejs-layouts": "^2.5.0",
+    "@types/express-session": "^1.17.5",
+    "@types/fs-extra": "^9.0.13",
+    "@types/method-override": "^0.0.32",
+    "@types/multer": "^1.4.7",
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "@typescript-eslint/parser": "^5.30.0",
+    "eslint": "^8.18.0",
+    "fs-extra": "^10.1.0",
+    "rimraf": "^3.0.2"
+  },
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^4.6.0",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.17.3",
+    "kmeans-engine": "^1.5.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.8.3",
+    "multer": "^1.4.5-lts.1",
+    "nanoid": "^3.3.4",
+    "whichx": "^3.0.1"
+  }
+}

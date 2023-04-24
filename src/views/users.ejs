@@ -1,0 +1,121 @@
+<%- include('./component/modal/users/add') %>
+<!--  -->
+<%- include('./component/modal/users/edit') %>
+<!--  -->
+<%- include('./component/modal/users/delete') %>
+
+<div class="container-fluid">
+  <div class="row p-5 justify-content-center">
+    <div class="col">
+      <h1 class="display-6 mb-3">
+        Pengguna
+        <a
+          class="text-decoration-none btn btn-success text-center"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#add"
+        >
+          <i class="bi bi-person-plus"></i>
+        </a>
+      </h1>
+      <form
+        class="input-group mb-5"
+        role="search"
+        method="post"
+        style="width: 500px"
+        action="/admin/search"
+      >
+        <select class="form-select" name="category" id="search" required>
+          <option value="name"
+          <% if (category && category === 'name') { %>
+          selected
+          <% } %>
+          >Nama</option>
+          <option value="email"
+          <% if (category && category === 'email') { %>
+            selected
+          <% } %>
+          >Email</option>
+          <option value="role"
+          <% if (category && category === 'role') { %>
+            selected
+          <% } %>
+          >Role</option>
+          <option value="address"
+          <% if (category && category === 'address') { %>
+            selected
+          <% } %>
+          >Alamat</option>
+          <option value="phone"
+          <% if (category && category === 'phone') { %>
+            selected
+          <% } %>
+          >Nomor Telepon</option>
+        </select>
+        <input
+          class="form-control"
+          type="search"
+          name="query"
+          placeholder="Kata kunci"
+          aria-label="Search"
+          autocomplete="off"
+          value="<%= query %>"
+        />
+        <button class="btn btn-success" type="submit">
+          <i class="bi bi-search"></i> Cari
+        </button>
+      </form>
+      <h5 class="text-success mb-3">Jumlah Pengguna : <%= users.length %></h5>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr class="table-dark">
+            <th scope="col">No</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col">Alamat</th>
+            <th scope="col">Nomor Telepon</th>
+            <th scope="col">Terakhir Login</th>
+            <th scope="col">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach((user, index) => { %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.role %></td>
+            <td><%= user.address %></td>
+            <td><%= user.phone %></td>
+            <td>
+              <%= user.lastLogin.toLocaleDateString('id', { day: 'numeric',
+              month: 'long', year: 'numeric'}) %> - <%=
+              user.lastLogin.toLocaleTimeString('it-IT') %>
+            </td>
+            <td>
+              <a
+                class="text-decoration-none text-success text-center"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#edit<%= user.id %>"
+              >
+                <i class="bi bi-pencil-square"></i>
+              </a>
+              &ensp;|&ensp;
+              <a
+                class="text-decoration-none text-danger text-center"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#delete<%= user.id %>"
+              >
+                <i class="bi bi-trash"></i>
+              </a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

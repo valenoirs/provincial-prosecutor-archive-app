@@ -1,0 +1,157 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a
+      class="navbar-brand pt-3"
+      role="button"
+      style="font-family: 'Times New Roman', Times, serif"
+      ><h5>
+        <img src="/assets/logo.png" alt="" width="42px" />
+        <span class="fw-lights">PENGARSIPAN</span>
+      </h5></a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/"
+            ><i class="bi bi-house-door-fill"></i> Beranda</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/masuk?category=no&query="
+            ><i class="bi bi-inboxes-fill"></i> Surat Masuk</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/keluar?category=no&query="
+            ><i class="bi bi-envelope-paper-fill"></i> Surat Keluar</a
+          >
+        </li>
+        <% if (locals.user && locals.user.role === "ADMIN") { %>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            aria-current="page"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#upload"
+            ><i class="bi bi-envelope-plus-fill"></i> Upload</a
+          >
+        </li>
+        <% } %> <% if (locals.user && locals.user.role === "SUPER") { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/users?category=name&query="
+            ><i class="bi bi-people-fill"></i> Pengguna</a
+          >
+        </li>
+        <% } %> <% if (locals.user && locals.user.role === "SUPER") { %>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/bagian"
+            ><i class="bi bi-person-vcard-fill"></i> Bagian</a
+          >
+        </li> -->
+        <% } %>
+        <!-- <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-search"></i> Browse
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a
+                class="dropdown-item text-secondary"
+                href="/skripsi/search?title"
+                ><i class="bi bi-pen"></i> Titles</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                class="dropdown-item text-secondary"
+                href="/skripsi/search?author"
+                ><i class="bi bi-people"></i> Authors</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                class="dropdown-item text-secondary"
+                href="/skripsi/search?year"
+                ><i class="bi bi-calendar-date"></i> Years</a
+              >
+            </li>
+          </ul>
+        </li> -->
+      </ul>
+      <div class="d-flex">
+        <% if (locals.user) { %>
+        <div class="dropdown">
+          <a
+            class="text-success me-4"
+            href="#"
+            id="navbarDarkDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            data-bs-auto-close="outside"
+            style="text-decoration: none"
+            ><i class="bi bi-person-circle"></i> <%= locals.user.name %></a
+          >
+          <ul
+            class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end"
+            aria-labelledby="navbarDropdown"
+          >
+            <li>
+              <div class="container pe-3 ps-3">
+                <p>
+                  <%= locals.user.name %>
+                  <br />
+                  <span class="text-secondary" style="font-size: 0.9rem">
+                    <%= locals.user.email %>
+                  </span>
+                  <br />
+                  <span class="text-secondary" style="font-size: 0.9rem">
+                    <%= locals.user.role %>
+                  </span>
+                </p>
+              </div>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                class="dropdown-item text-success"
+                href="/edit-profile"
+                style="text-decoration: none"
+                ><i class="bi bi-pencil-square"></i> Edit Profil</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item text-danger"
+                href="/user/signout"
+                style="text-decoration: none"
+                ><i class="bi bi-box-arrow-in-left"></i> Keluar</a
+              >
+            </li>
+          </ul>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
