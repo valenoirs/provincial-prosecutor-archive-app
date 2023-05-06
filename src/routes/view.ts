@@ -3,11 +3,18 @@ import { Request, Response } from 'express'
 import { Masuk } from '../models/masuk'
 import { Keluar } from '../models/keluar'
 import { User } from '../models/user'
+import { Keyword } from '../models/keyword'
 
 export const router = Router()
 
 router.get('/signin', async (req: Request, res: Response) => {
-  if (req.session.user) return res.redirect('/')
+  if (req.session.user) {
+    req.flash(
+      'notification',
+      'Sesi login masih ada, silahkan keluar terlebih dahulu.'
+    )
+    return res.redirect('/')
+  }
 
   return res.render('signin', {
     layout: 'layout',
@@ -15,21 +22,25 @@ router.get('/signin', async (req: Request, res: Response) => {
   })
 })
 
-// router.get('/bagian', async (req: Request, res: Response) => {
-//   if (!req.session.user) {
-//     req.flash('notification', 'Harap masuk untuk melanjutkan.')
-//     return res.redirect('/signin')
-//   }
-//   if (req.session.user.role !== 'SUPER') {
-//     req.flash('notification', 'Anda tidak berhak mengakses halaman ini.')
-//     return res.redirect('/')
-//   }
+router.get('/keyword', async (req: Request, res: Response) => {
+  if (!req.session.user) {
+    req.flash('notification', 'Harap masuk untuk melanjutkan.')
+    return res.redirect('/signin')
+  }
 
-//   return res.render('bagian', {
-//     layout: 'layout',
-//     notification: req.flash('notification'),
-//   })
-// })
+  if (req.session.user.role !== 'SUPER') {
+    req.flash('notification', 'Anda tidak berhak mengakses halaman ini.')
+    return res.redirect('/')
+  }
+
+  const keyword = await Keyword.find({}, { _id: 0, keyword: 1 })
+
+  return res.render('keyword', {
+    layout: 'layout',
+    notification: req.flash('notification'),
+    keyword,
+  })
+})
 
 router.get('/users', async (req: Request, res: Response) => {
   if (!req.session.user) {

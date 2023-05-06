@@ -10,3 +10,5 @@ router.delete('/', admin.remove)
 router.put('/', admin.edit)
 
 router.post('/search', admin.search)
+
+router.post('/keyword', admin.keyword)

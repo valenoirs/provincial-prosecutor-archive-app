@@ -53,7 +53,7 @@ export const signIn = async (req: Request, res: Response) => {
     // Sign in success
     req.flash('notification', `Berhasil masuk sebagai ${name}.`)
     console.log('[SERVER]: User logged in.')
-    return res.redirect('back')
+    return res.redirect('/')
   } catch (error) {
     // Sign in error
     req.flash(

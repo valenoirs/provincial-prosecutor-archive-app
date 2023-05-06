@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { User } from '../models/user'
+import { Keyword } from '../models/keyword'
 
 /**
  * add new user controller
@@ -141,6 +142,20 @@ export const search = async (req: Request, res: Response) => {
       'Terjadi kesalahan saat melakukan pencarian, coba lagi.'
     )
     console.error('[SERVER]: User search error.', error)
+    return res.redirect('/')
+  }
+}
+
+export const keyword = async (req: Request, res: Response) => {
+  try {
+    const { type } = req.body
+
+    await Keyword.updateOne({ type }, { $set: req.body })
+
+    return res.redirect('back')
+  } catch (error) {
+    req.flash('notification', 'Terjadi kesalahan, coba lagi.')
+    console.error('[SERVER]: Keyword error.', error)
     return res.redirect('/')
   }
 }

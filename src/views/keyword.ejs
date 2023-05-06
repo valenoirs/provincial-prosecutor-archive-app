@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row p-5 justify-content-center">
+    <div class="col-5">
+      <label for="masuk" class="form-label">Surat Masuk</label>
+      <form class="input-group" action="/admin/keyword" method="post">
+        <input
+          type="text"
+          name="keyword"
+          class="form-control"
+          id="masuk"
+          autocomplete="off"
+          value="<%= keyword[0].keyword %>"
+          required
+        />
+        <input type="hidden" name="type" value="masuk" />
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+      <div id="masukHelper" class="form-text"><%= keyword[0].keyword%></div>
+      <br />
+      <label for="keluar" class="form-label">Surat Keluar</label>
+      <form class="input-group" action="/admin/keyword" method="post">
+        <input
+          type="text"
+          name="keyword"
+          class="form-control"
+          id="keluar"
+          autocomplete="off"
+          value="<%= keyword[1].keyword %>"
+          required
+        />
+        <input type="hidden" name="type" value="keluar" />
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+      <div id="keluarHelper" class="form-text"><%= keyword[1].keyword %></div>
+    </div>
+  </div>
+</div>

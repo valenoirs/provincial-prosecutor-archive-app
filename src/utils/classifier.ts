@@ -71,10 +71,12 @@ export const clasify = (text: string = ' ') => {
   return kmeans.clusterize(
     data,
     { k: 2, maxIterations: 5, debug: false },
-    (err: any, res: any) => {
-      console.log('Classifying')
+    async (err: any, res: any) => {
+      console.log('Classifying...')
 
-      return trim(text)
+      const output = await trim(text)
+
+      return output
     }
   )
 }

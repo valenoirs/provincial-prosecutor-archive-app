@@ -1,6 +1,6 @@
 declare namespace Express {
   // interface CustomSessionFields {
-  //   valenoirs: any;
+  //   user: any
   // }
 
   export interface Request {

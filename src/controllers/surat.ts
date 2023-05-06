@@ -31,11 +31,14 @@ export const upload = async (req: Request, res: Response) => {
     req.body.uri = `/upload/surat/${req.file?.filename}`
     req.body.sender = req.session.user.name
 
-    const jenisSurat = clasify(about)
+    const jenisSurat = await clasify(about)
+
+    console.log(jenisSurat)
 
     if (jenisSurat === 'Surat Keluar') {
       await new Keluar(req.body).save()
-    } else {
+    }
+    if (jenisSurat === 'Surat Masuk') {
       await new Masuk(req.body).save()
     }
 
