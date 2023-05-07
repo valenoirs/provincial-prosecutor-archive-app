@@ -89,9 +89,9 @@
             <td><%= user.address %></td>
             <td><%= user.phone %></td>
             <td>
-              <%= user.lastLogin.toLocaleDateString('id', { day: 'numeric',
+              <%= user.lastLogin.toLocaleDateString('id', {weekday: 'long', day: 'numeric',
               month: 'long', year: 'numeric'}) %> - <%=
-              user.lastLogin.toLocaleTimeString('it-IT') %>
+              user.lastLogin.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}) %>
             </td>
             <td>
               <a
