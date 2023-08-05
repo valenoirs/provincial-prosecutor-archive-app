@@ -41,11 +41,13 @@
             selected
           <% } %>
           >Role</option>
-          <option value="address"
-          <% if (category && category === 'address') { %>
-            selected
+          <% if (locals.user.role === 'ROOT') { %>
+            <option value="address"
+            <% if (category && category === 'address') { %>
+              selected
+            <% } %>
+            >Alamat</option>
           <% } %>
-          >Alamat</option>
           <option value="phone"
           <% if (category && category === 'phone') { %>
             selected

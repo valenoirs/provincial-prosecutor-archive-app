@@ -11,6 +11,7 @@ import { Keyword } from '../models/keyword'
 export const add = async (req: Request, res: Response) => {
   try {
     const { email } = req.body
+    const { role, address } = req.session.user
 
     const user = await User.findOne({ email })
 
@@ -21,6 +22,10 @@ export const add = async (req: Request, res: Response) => {
       )
       console.log('[SERVER]: User already existed.')
       return res.redirect('back')
+    }
+
+    if (role === 'SUPER') {
+      req.body.address = address
     }
 
     await new User(req.body).save()

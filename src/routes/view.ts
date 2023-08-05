@@ -47,7 +47,10 @@ router.get('/users', async (req: Request, res: Response) => {
     req.flash('notification', 'Harap masuk untuk melanjutkan.')
     return res.redirect('/signin')
   }
-  if (req.session.user.role !== 'SUPER') {
+
+  const { role, address } = req.session.user
+
+  if (role !== 'SUPER' && role !== 'ROOT') {
     req.flash('notification', 'Anda tidak berhak mengakses halaman ini.')
     return res.redirect('/')
   }
@@ -56,28 +59,54 @@ router.get('/users', async (req: Request, res: Response) => {
 
   const { category, query } = req.query
 
-  if (!category) {
-    return res.redirect('/')
-  } else if (category === 'name') {
-    users = await User.find({
-      name: { $regex: query, $options: 'i' },
-    }).sort({ name: 1 })
-  } else if (category === 'email') {
-    users = await User.find({
-      email: { $regex: query, $options: 'i' },
-    }).sort({ email: 1 })
-  } else if (category === 'role') {
-    users = await User.find({
-      role: { $regex: query, $options: 'i' },
-    }).sort({ role: 1 })
-  } else if (category === 'address') {
-    users = await User.find({
-      address: { $regex: query, $options: 'i' },
-    }).sort({ address: 1 })
-  } else if (category === 'phone') {
-    users = await User.find({
-      phone: { $regex: query, $options: 'i' },
-    }).sort({ phone: 1 })
+  if (role === 'SUPER') {
+    if (!category) {
+      return res.redirect('/')
+    } else if (category === 'name') {
+      users = await User.find({
+        name: { $regex: query, $options: 'i' },
+        address,
+      }).sort({ name: 1 })
+    } else if (category === 'email') {
+      users = await User.find({
+        email: { $regex: query, $options: 'i' },
+        address,
+      }).sort({ email: 1 })
+    } else if (category === 'role') {
+      users = await User.find({
+        role: { $regex: query, $options: 'i' },
+        address,
+      }).sort({ role: 1 })
+    } else if (category === 'phone') {
+      users = await User.find({
+        phone: { $regex: query, $options: 'i' },
+        address,
+      }).sort({ phone: 1 })
+    }
+  } else if (role === 'ROOT') {
+    if (!category) {
+      return res.redirect('/')
+    } else if (category === 'name') {
+      users = await User.find({
+        name: { $regex: query, $options: 'i' },
+      }).sort({ name: 1 })
+    } else if (category === 'email') {
+      users = await User.find({
+        email: { $regex: query, $options: 'i' },
+      }).sort({ email: 1 })
+    } else if (category === 'role') {
+      users = await User.find({
+        role: { $regex: query, $options: 'i' },
+      }).sort({ role: 1 })
+    } else if (category === 'address') {
+      users = await User.find({
+        address: { $regex: query, $options: 'i' },
+      }).sort({ address: 1 })
+    } else if (category === 'phone') {
+      users = await User.find({
+        phone: { $regex: query, $options: 'i' },
+      }).sort({ phone: 1 })
+    }
   }
 
   return res.render('users', {

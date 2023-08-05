@@ -27,10 +27,6 @@
             <label for="email" class="form-label">Email</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="address" name="address" placeholder=" " required autocomplete="off">
-            <label for="address" class="form-label">Alamat</label>
-          </div>
-          <div class="form-floating mb-3">
             <input type="text" class="form-control" id="phone" name="phone" placeholder=" " required autocomplete="off">
             <label for="phone" class="form-label">No. Telp</label>
           </div>
@@ -38,12 +34,36 @@
             <input type="password" class="form-control" id="password" name="password" placeholder=" " required>
             <label for="password" class="form-label">Password</label>
           </div>
+          <% if (locals.user.role === 'ROOT') { %>
+            <div class="mb-3">
+              <!-- <input type="text" class="form-control" id="address" name="address" placeholder=" " required autocomplete="off"> -->
+              <label for="address" class="form-label">Alamat</label>
+              <select class="form-select" name="address" id="address" required>
+                <option value="KEJAKSAAN TINGGI SULAWESI UTARA">KEJAKSAAN TINGGI SULAWESI UTARA</option>
+                <option value="KEJAKSAAN NEGERI MANADO">KEJAKSAAN NEGERI MANADO</option>
+                <option value="KEJAKSAAN NEGERI MINAHASA">KEJAKSAAN NEGERI MINAHASA</option>
+                <option value="KEJAKSAAN NEGERI KOTAMOBAGU">KEJAKSAAN NEGERI KOTAMOBAGU</option>
+                <option value="CABANG KEJAKSAAN NEGERI KOTAMOBAGU DI DUMOGA">CABANG KEJAKSAAN NEGERI KOTAMOBAGU DI DUMOGA</option>
+                <option value="KEJAKSAAN NEGERI KEPULAUAN SANGIHE">KEJAKSAAN NEGERI KEPULAUAN SANGIHE</option>
+                <option value="KEJAKSAAN NEGERI BITUNG">KEJAKSAAN NEGERI BITUNG</option>
+                <option value="KEJAKSAAN NEGERI MINAHASA SELATAN">KEJAKSAAN NEGERI MINAHASA SELATAN</option>
+                <option value="KEJAKSAAN NEGERI TOMOHON">KEJAKSAAN NEGERI TOMOHON</option>
+                <option value="KEJAKSAAN NEGERI KEPULAUAN TALAUD">KEJAKSAAN NEGERI KEPULAUAN TALAUD</option>
+                <option value="CABANG KEJAKSAAN NEGERI KEPULAUAN TALAUD">CABANG KEJAKSAAN NEGERI KEPULAUAN TALAUD</option>
+                <option value="KEJAKSAAN NEGERI MINAHASA UTARA">KEJAKSAAN NEGERI MINAHASA UTARA</option>
+                <option value="KEJAKSAAN NEGERI KEPULAUAN SIAU TAGULANDANG BIARO">KEJAKSAAN NEGERI KEPULAUAN SIAU TAGULANDANG BIARO</option>
+                <option value="CABANG KEJAKSAAN NEGERI LIMBOTO">CABANG KEJAKSAAN NEGERI LIMBOTO</option>
+                <option value="KEJAKSAAN NEGERI BOLAANG MONGONDOW UTARA">KEJAKSAAN NEGERI BOLAANG MONGONDOW UTARA</option>
+              </select>
+            </div>
+          <% } %>
           <div class="mb-3">
             <label for="year" class="form-label">Role</label>
             <select class="form-select" name="role" id="role" required>
               <option value="USER">USER</option>
               <option value="ADMIN">ADMIN</option>
               <option value="SUPER">SUPER</option>
+              <option value="ROOT">ROOT</option>
             </select>
           </div>
         </div>

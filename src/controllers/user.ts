@@ -29,14 +29,18 @@ export const signIn = async (req: Request, res: Response) => {
       return res.redirect('back')
     }
 
-    const { id, name, role } = user
+    const { id, name, role, address } = user
 
     // Create session
-    const userSession: Pick<IUser, 'id' | 'name' | 'email' | 'role'> = {
+    const userSession: Pick<
+      IUser,
+      'id' | 'name' | 'email' | 'role' | 'address'
+    > = {
       id,
       name,
       email,
       role,
+      address,
     }
 
     req.session.user = userSession
