@@ -63,7 +63,9 @@
               <option value="USER">USER</option>
               <option value="ADMIN">ADMIN</option>
               <option value="SUPER">SUPER</option>
-              <option value="ROOT">ROOT</option>
+              <% if (locals.user.role === "ROOT") { %>
+                <option value="ROOT">ROOT</option>
+              <% } %>
             </select>
           </div>
         </div>
