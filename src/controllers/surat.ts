@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { Masuk } from '../models/masuk'
 import { Keluar } from '../models/keluar'
 import { clasify } from '../utils/classifier'
+import { External } from '../models/external'
 
 /**
  * Upload surat controller
@@ -67,8 +68,9 @@ export const remove = async (req: Request, res: Response) => {
 
     const masuk = await Masuk.findById(id)
     const keluar = await Keluar.findById(id)
+    const external = await External.findById(id)
 
-    if (!masuk && !keluar) {
+    if (!masuk && !keluar && !external) {
       req.flash('notification', 'Surat tidak ditemukan.')
       console.log('[SERVER]: Surat not found.')
       return res.redirect('back')
@@ -78,6 +80,8 @@ export const remove = async (req: Request, res: Response) => {
       await Masuk.findByIdAndDelete(id)
     } else if (keluar) {
       await Keluar.findByIdAndDelete(id)
+    } else if (external) {
+      await External.findByIdAndDelete(id)
     }
 
     req.flash('notification', 'Surat berhasil dihapus.')
@@ -133,6 +137,112 @@ export const edit = async (req: Request, res: Response) => {
 }
 
 /**
+ * Send surat controller
+ * @param req Node HTTP Request
+ * @param res Node HTTP Response
+ * @returns HTTP Response
+ */
+export const send = async (req: Request, res: Response) => {
+  try {
+    const { address } = req.session.user
+    const { id, destination, keluar } = req.body
+
+    if (address === destination) {
+      req.flash(
+        'notification',
+        'Tidak dapat mengirim surat ke instansi sendiri.'
+      )
+      console.log('[SERVER]: Destination equal address.')
+      return res.redirect('back')
+    }
+
+    let surat: any
+    let type: string
+
+    if (keluar) {
+      surat = await Keluar.findById(id, {
+        _id: 0,
+        no: 1,
+        date: 1,
+        about: 1,
+        uri: 1,
+      })
+      type = 'Surat Masuk'
+    } else {
+      surat = await Masuk.findById(id, {
+        _id: 0,
+        no: 1,
+        date: 1,
+        about: 1,
+        uri: 1,
+      })
+      type = 'Surat Masuk'
+    }
+
+    if (!surat) {
+      req.flash('notification', 'Surat tidak ditemukan.')
+      console.log('[SERVER]: Surat not found.')
+      return res.redirect('back')
+    }
+
+    const { no, date, about, uri } = surat
+
+    const payload = { sender: address, destination, type, no, date, about, uri }
+    console.log(payload)
+
+    await new External(payload).save()
+
+    req.flash('notification', 'Surat berhasil dikirimkan.')
+    console.log('[SERVER]: Surat sent.')
+    return res.redirect('back')
+  } catch (error) {
+    req.flash(
+      'notification',
+      'Terjadi kesalahan saat mengirim surat, harap coba lagi.'
+    )
+    console.error('[SERVER]: Surat send error.', error)
+    return res.redirect('/')
+  }
+}
+
+/**
+ * Send surat controller
+ * @param req Node HTTP Request
+ * @param res Node HTTP Response
+ * @returns HTTP Response
+ */
+export const read = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.body
+
+    const surat = await External.findById(id)
+
+    if (!surat) {
+      req.flash('notification', 'Surat tidak ditemukan.')
+      console.log('[SERVER]: Surat not found.')
+      return res.redirect('back')
+    }
+
+    await External.findByIdAndUpdate(id, {
+      $set: {
+        read: 'Sudah Dibaca',
+      },
+    })
+
+    req.flash('notification', 'Surat berhasil diperbarui.')
+    console.log('[SERVER]: Surat sent.')
+    return res.redirect('back')
+  } catch (error) {
+    req.flash(
+      'notification',
+      'Terjadi kesalahan saat mengubah informasi surat, coba lagi.'
+    )
+    console.error('[SERVER]: Surat send error.', error)
+    return res.redirect('/')
+  }
+}
+
+/**
  * Search surat controller
  * @param req Node HTTP Request
  * @param res Node HTTP Response
@@ -155,6 +265,34 @@ export const search = async (req: Request, res: Response) => {
       }
     }
     if (path === '/keluar') {
+      if (category === 'no') {
+        return res.redirect(`/keluar?category=${category}&query=${query}`)
+      }
+      if (category === 'date') {
+        return res.redirect(`/keluar?category=${category}&query=${query}`)
+      }
+      if (category === 'about') {
+        return res.redirect(`/keluar?category=${category}&query=${query}`)
+      }
+      if (category === 'sender') {
+        return res.redirect(`/keluar?category=${category}&query=${query}`)
+      }
+    }
+    if (path === '/sent') {
+      if (category === 'no') {
+        return res.redirect(`/keluar?category=${category}&query=${query}`)
+      }
+      if (category === 'date') {
+        return res.redirect(`/keluar?category=${category}&query=${query}`)
+      }
+      if (category === 'about') {
+        return res.redirect(`/keluar?category=${category}&query=${query}`)
+      }
+      if (category === 'destination') {
+        return res.redirect(`/keluar?category=${category}&query=${query}`)
+      }
+    }
+    if (path === '/received') {
       if (category === 'no') {
         return res.redirect(`/keluar?category=${category}&query=${query}`)
       }

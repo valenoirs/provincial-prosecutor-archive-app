@@ -4,6 +4,7 @@ import { Masuk } from '../models/masuk'
 import { Keluar } from '../models/keluar'
 import { User } from '../models/user'
 import { Keyword } from '../models/keyword'
+import { External } from '../models/external'
 
 export const router = Router()
 
@@ -115,6 +116,98 @@ router.get('/users', async (req: Request, res: Response) => {
     users,
     category,
     query,
+  })
+})
+
+router.get('/sent', async (req: Request, res: Response) => {
+  if (!req.session.user) {
+    req.flash('notification', 'Harap masuk untuk melanjutkan.')
+    return res.redirect('/signin')
+  }
+
+  const { address } = req.session.user
+
+  let surats: any
+
+  const { category, query } = req.query
+
+  if (!category) {
+    return res.redirect('/')
+  } else if (category === 'no') {
+    surats = await External.find({
+      no: { $regex: query, $options: 'i' },
+      sender: address,
+    }).sort({ no: 1 })
+  } else if (category === 'date') {
+    surats = await External.find({
+      date: { $regex: query, $options: 'i' },
+      sender: address,
+    }).sort({ date: 1 })
+  } else if (category === 'about') {
+    surats = await External.find({
+      about: { $regex: query, $options: 'i' },
+      sender: address,
+    }).sort({ about: 1 })
+  } else if (category === 'destination') {
+    surats = await External.find({
+      destination: { $regex: query, $options: 'i' },
+      sender: address,
+    }).sort({ about: 1 })
+  }
+
+  return res.render('sent', {
+    layout: 'layout',
+    notification: req.flash('notification'),
+    surats,
+    category,
+    query,
+    keluar: true,
+  })
+})
+
+router.get('/received', async (req: Request, res: Response) => {
+  if (!req.session.user) {
+    req.flash('notification', 'Harap masuk untuk melanjutkan.')
+    return res.redirect('/signin')
+  }
+
+  const { address } = req.session.user
+
+  let surats: any
+
+  const { category, query } = req.query
+
+  if (!category) {
+    return res.redirect('/')
+  } else if (category === 'no') {
+    surats = await External.find({
+      no: { $regex: query, $options: 'i' },
+      destination: address,
+    }).sort({ no: 1 })
+  } else if (category === 'date') {
+    surats = await External.find({
+      date: { $regex: query, $options: 'i' },
+      destination: address,
+    }).sort({ date: 1 })
+  } else if (category === 'about') {
+    surats = await External.find({
+      about: { $regex: query, $options: 'i' },
+      destination: address,
+    }).sort({ about: 1 })
+  } else if (category === 'sender') {
+    surats = await External.find({
+      sender: { $regex: query, $options: 'i' },
+      destination: address,
+    }).sort({ about: 1 })
+  }
+
+  return res.render('received', {
+    layout: 'layout',
+    notification: req.flash('notification'),
+    surats,
+    category,
+    query,
+    keluar: true,
   })
 })
 

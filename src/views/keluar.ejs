@@ -1,6 +1,8 @@
 <%- include('./component/modal/surat/edit') %>
 <!--  -->
 <%- include('./component/modal/surat/delete') %>
+<!--  -->
+<%- include('./component/modal/surat/send') %>
 
 <div class="container-fluid">
   <div class="row p-5 justify-content-center">
@@ -57,7 +59,6 @@
             <th scope="col">Tanggal Surat</th>
             <th scope="col">Perihal</th>
             <th scope="col">Pengirim</th>
-            <th scope="col">Dibaca</th>
             <% if (locals.user.role === "ADMIN") { %>
             <th scope="col">Aksi</th>
             <% } %>
@@ -71,7 +72,6 @@
             <td><%= surat.date %></td>
             <td><%= surat.about %></td>
             <td><%= surat.sender %></td>
-            <td><%= surat.read %></td>
             <% if (locals.user.role === "ADMIN") { %>
             <td>
               <a
@@ -97,6 +97,15 @@
                 href="<%= surat.uri %>"
               >
                 <i class="bi bi-cloud-download"></i>
+              </a>
+              &ensp;|&ensp;
+              <a
+                class="text-decoration-none text-dark text-center"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#send<%= surat.id %>"
+              >
+                <i class="bi bi-send"></i>
               </a>
             </td>
             <% } %>

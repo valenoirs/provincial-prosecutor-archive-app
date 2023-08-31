@@ -37,6 +37,27 @@
             ><i class="bi bi-envelope-paper-fill"></i> Surat Keluar</a
           >
         </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-mailbox2"></i> Surat External
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="/sent?category=no&query=">Sent</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/received?category=no&query="
+                >Received</a
+              >
+            </li>
+          </ul>
+        </li>
         <% if (locals.user && locals.user.role === "ADMIN") { %>
         <li class="nav-item">
           <a

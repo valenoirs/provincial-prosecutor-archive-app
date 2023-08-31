@@ -1,19 +1,15 @@
-<%- include('./component/modal/surat/delete') %>
-<!--  -->
-<%- include('./component/modal/surat/edit') %>
-<!--  -->
-<%- include('./component/modal/surat/send') %>
+<%- include('./component/modal/surat/read') %>
 
 <div class="container-fluid">
   <div class="row p-5 justify-content-center">
     <div class="col">
-      <h1 class="display-6 mb-3">Surat Masuk</h1>
+      <h1 class="display-6 mb-3">Surat External</h1>
       <form
         class="input-group mb-5"
         role="search"
         method="post"
         style="width: 500px"
-        action="/surat/masuk"
+        action="/surat/keluar"
       >
         <select class="form-select" name="category" id="search" required>
           <option value="no"
@@ -26,11 +22,16 @@
             selected
            <% } %>
            >Tanggal Surat</option>
-          <option value="about"
-          <% if (category && category === 'about') { %>
-            selected
-           <% } %>
-          >Perihal</option>
+           <option value="about"
+           <% if (category && category === 'about') { %>
+             selected
+            <% } %>
+           >Perihal</option>
+           <option value="sender"
+           <% if (category && category === 'sender') { %>
+             selected
+            <% } %>
+           >Pengirim</option>
         </select>
         <input
           class="form-control"
@@ -53,6 +54,10 @@
             <th scope="col">Nomor Surat</th>
             <th scope="col">Tanggal Surat</th>
             <th scope="col">Perihal</th>
+            <th scope="col">Pengirim</th>
+            <th scope="col">Tujuan</th>
+            <th scope="col">Tipe</th>
+            <th scope="col">Dibaca</th>
             <% if (locals.user.role === "ADMIN") { %>
             <th scope="col">Aksi</th>
             <% } %>
@@ -65,41 +70,29 @@
             <td><%= surat.no %></td>
             <td><%= surat.date %></td>
             <td><%= surat.about %></td>
+            <td><%= surat.sender %></td>
+            <td><%= surat.destination %></td>
+            <td><%= surat.type %></td>
+            <td><%= surat.read %></td>
             <% if (locals.user.role === "ADMIN") { %>
             <td>
-              <a
-                class="text-decoration-none text-success text-center"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#edit<%= surat.id %>"
-              >
-                <i class="bi bi-pencil-square"></i>
-              </a>
-              &ensp;|&ensp;
-              <a
-                class="text-decoration-none text-danger text-center"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#delete<%= surat.id %>"
-              >
-                <i class="bi bi-trash"></i>
-              </a>
-              &ensp;|&ensp;
               <a
                 class="text-decoration-none text-primary text-center"
                 href="<%= surat.uri %>"
               >
                 <i class="bi bi-cloud-download"></i>
               </a>
-              &ensp;|&ensp;
-              <a
-                class="text-decoration-none text-dark text-center"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#send<%= surat.id %>"
-              >
-                <i class="bi bi-send"></i>
-              </a>
+              <% if (surat.read === "Belum Dibaca") { %>
+                &ensp;|&ensp;
+                <a
+                  class="text-decoration-none text-success text-center"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#send<%= surat.id %>"
+                >
+                  <i class="bi bi-patch-check"></i>
+                </a>
+              <% } %>
             </td>
             <% } %>
           </tr>

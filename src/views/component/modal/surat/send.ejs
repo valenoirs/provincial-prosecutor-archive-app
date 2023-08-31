@@ -1,0 +1,98 @@
+<% surats.forEach(surat => { %>
+<div
+  class="modal fade"
+  id="send<%= surat.id %>"
+  tabindex="-1"
+  aria-labelledby="sendLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="sendLabel">
+          <i class="bi bi-chevron-right"></i> Kirim Surat
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>Kemana anda ingin mengirimkan <span class="text-dark">surat</span>?</p>
+        <form action="/surat/send" method="post">
+          <div class="mb-3">
+            <select class="form-select" name="destination" id="destination" required>
+              <option value="KEJAKSAAN TINGGI SULAWESI UTARA">
+                KEJAKSAAN TINGGI SULAWESI UTARA
+              </option>
+              <option value="KEJAKSAAN NEGERI MANADO">
+                KEJAKSAAN NEGERI MANADO
+              </option>
+              <option value="KEJAKSAAN NEGERI MINAHASA">
+                KEJAKSAAN NEGERI MINAHASA
+              </option>
+              <option value="KEJAKSAAN NEGERI KOTAMOBAGU">
+                KEJAKSAAN NEGERI KOTAMOBAGU
+              </option>
+              <option value="CABANG KEJAKSAAN NEGERI KOTAMOBAGU DI DUMOGA">
+                CABANG KEJAKSAAN NEGERI KOTAMOBAGU DI DUMOGA
+              </option>
+              <option value="KEJAKSAAN NEGERI KEPULAUAN SANGIHE">
+                KEJAKSAAN NEGERI KEPULAUAN SANGIHE
+              </option>
+              <option value="KEJAKSAAN NEGERI BITUNG">
+                KEJAKSAAN NEGERI BITUNG
+              </option>
+              <option value="KEJAKSAAN NEGERI MINAHASA SELATAN">
+                KEJAKSAAN NEGERI MINAHASA SELATAN
+              </option>
+              <option value="KEJAKSAAN NEGERI TOMOHON">
+                KEJAKSAAN NEGERI TOMOHON
+              </option>
+              <option value="KEJAKSAAN NEGERI KEPULAUAN TALAUD">
+                KEJAKSAAN NEGERI KEPULAUAN TALAUD
+              </option>
+              <option value="CABANG KEJAKSAAN NEGERI KEPULAUAN TALAUD">
+                CABANG KEJAKSAAN NEGERI KEPULAUAN TALAUD
+              </option>
+              <option value="KEJAKSAAN NEGERI MINAHASA UTARA">
+                KEJAKSAAN NEGERI MINAHASA UTARA
+              </option>
+              <option value="KEJAKSAAN NEGERI KEPULAUAN SIAU TAGULANDANG BIARO">
+                KEJAKSAAN NEGERI KEPULAUAN SIAU TAGULANDANG BIARO
+              </option>
+              <option value="CABANG KEJAKSAAN NEGERI LIMBOTO">
+                CABANG KEJAKSAAN NEGERI LIMBOTO
+              </option>
+              <option value="KEJAKSAAN NEGERI BOLAANG MONGONDOW UTARA">
+                KEJAKSAAN NEGERI BOLAANG MONGONDOW UTARA
+              </option>
+            </select>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            data-bs-dismiss="modal"
+          >
+            Batal
+          </button>
+
+          <% if (keluar) { %>
+            <input type="hidden" name="keluar" value="1"/> 
+          <% } %>
+          
+          <input type="hidden" name="id" value="<%= surat.id %>" />
+
+          <button type="submit" class="btn btn-dark">
+            <i class="bi bi-send"></i> Kirim
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<% }) %>
