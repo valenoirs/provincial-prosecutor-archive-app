@@ -7,7 +7,7 @@ const KeluarSchema: Schema = new Schema<IKeluar>(
     date: { type: String, required: true },
     about: { type: String, required: true },
     uri: { type: String, required: true },
-    sender: { type: String, required: true },
+    owner: { type: String, required: true },
     read: { type: String, required: true, default: 'Dibaca' },
   },
   {

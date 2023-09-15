@@ -30,7 +30,8 @@ export const upload = async (req: Request, res: Response) => {
     }
 
     req.body.uri = `/upload/surat/${req.file?.filename}`
-    req.body.sender = req.session.user.name
+    // req.body.sender = req.session.user.name
+    req.body.owner = req.session.user.address
 
     const jenisSurat = await clasify(about)
 

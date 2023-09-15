@@ -31,11 +31,6 @@
              selected
             <% } %>
            >Perihal</option>
-           <option value="sender"
-           <% if (category && category === 'sender') { %>
-             selected
-            <% } %>
-           >Pengirim</option>
         </select>
         <input
           class="form-control"
@@ -58,9 +53,8 @@
             <th scope="col">Nomor Surat</th>
             <th scope="col">Tanggal Surat</th>
             <th scope="col">Perihal</th>
-            <th scope="col">Pengirim</th>
             <% if (locals.user.role === "ADMIN") { %>
-            <th scope="col">Aksi</th>
+            <th scope="col" width="170">Aksi</th>
             <% } %>
           </tr>
         </thead>
@@ -71,7 +65,6 @@
             <td><%= surat.no %></td>
             <td><%= surat.date %></td>
             <td><%= surat.about %></td>
-            <td><%= surat.sender %></td>
             <% if (locals.user.role === "ADMIN") { %>
             <td>
               <a

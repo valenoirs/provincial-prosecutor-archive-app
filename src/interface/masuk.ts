@@ -4,7 +4,8 @@ export interface IMasuk {
   date: string
   about: string
   uri: string
-  read: string
+  // read: string
+  owner: string
   createdAt?: Date
   updatedAt?: Date
 }

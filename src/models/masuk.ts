@@ -7,7 +7,8 @@ const MasukSchema: Schema = new Schema<IMasuk>(
     date: { type: String, required: true },
     about: { type: String, required: true },
     uri: { type: String, required: true },
-    read: { type: String, required: true, default: 'Dibaca' },
+    owner: { type: String, required: true },
+    // read: { type: String, required: true, default: 'Dibaca' },
   },
   {
     timestamps: true,

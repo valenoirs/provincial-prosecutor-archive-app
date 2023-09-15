@@ -217,6 +217,8 @@ router.get('/masuk', async (req: Request, res: Response) => {
     return res.redirect('/signin')
   }
 
+  const { address } = req.session.user
+
   let surats: any
 
   const { category, query } = req.query
@@ -226,14 +228,17 @@ router.get('/masuk', async (req: Request, res: Response) => {
   } else if (category === 'no') {
     surats = await Masuk.find({
       no: { $regex: query, $options: 'i' },
+      owner: address,
     }).sort({ no: 1 })
   } else if (category === 'date') {
     surats = await Masuk.find({
       date: { $regex: query, $options: 'i' },
+      owner: address,
     }).sort({ date: 1 })
   } else if (category === 'about') {
     surats = await Masuk.find({
       about: { $regex: query, $options: 'i' },
+      owner: address,
     }).sort({ about: 1 })
   }
 
@@ -253,6 +258,8 @@ router.get('/keluar', async (req: Request, res: Response) => {
     return res.redirect('/signin')
   }
 
+  const { address } = req.session.user
+
   let surats: any
 
   const { category, query } = req.query
@@ -262,20 +269,24 @@ router.get('/keluar', async (req: Request, res: Response) => {
   } else if (category === 'no') {
     surats = await Keluar.find({
       no: { $regex: query, $options: 'i' },
+      owner: address,
     }).sort({ no: 1 })
   } else if (category === 'date') {
     surats = await Keluar.find({
       date: { $regex: query, $options: 'i' },
+      owner: address,
     }).sort({ date: 1 })
   } else if (category === 'about') {
     surats = await Keluar.find({
       about: { $regex: query, $options: 'i' },
+      owner: address,
     }).sort({ about: 1 })
-  } else if (category === 'sender') {
-    surats = await Keluar.find({
-      sender: { $regex: query, $options: 'i' },
-    }).sort({ sender: 1 })
   }
+  // else if (category === 'sender') {
+  //   surats = await Keluar.find({
+  //     sender: { $regex: query, $options: 'i' },
+  //   }).sort({ sender: 1 })
+  // }
 
   return res.render('keluar', {
     layout: 'layout',
@@ -305,8 +316,8 @@ router.get('/', async (req: Request, res: Response) => {
     return res.redirect('/signin')
   }
 
-  const masuk = await Masuk.find().count()
-  const keluar = await Keluar.find().count()
+  const masuk = await Masuk.find({owner: req.session.user.address}).count()
+  const keluar = await Keluar.find({owner: req.session.user.address}).count()
 
   return res.render('index', {
     layout: 'layout',
